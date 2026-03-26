@@ -1,0 +1,1769 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevUp — Seu Site Profissional em Dias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #000000;
+    --white: #FFFFFF;
+    --blue: #4A90D9;
+    --blue-dark: #2f6eb5;
+    --blue-glow: rgba(74, 144, 217, 0.25);
+    --gray-900: #0a0a0a;
+    --gray-800: #111111;
+    --gray-700: #1a1a1a;
+    --gray-600: #242424;
+    --gray-400: #555555;
+    --gray-300: #888888;
+    --gray-200: #aaaaaa;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; line-height: 1.1; }
+
+  /* ─── NOISE OVERLAY ─────────────────────── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* ─── NAV ────────────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    transition: background 0.3s;
+  }
+
+  .logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .img-logo{
+    height: 75px;
+  }
+
+  .logo span { color: var(--blue); }
+
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--blue);
+    color: var(--white);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+
+  .nav-cta:hover {
+    background: var(--blue-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px var(--blue-glow);
+  }
+
+  /* ─── BUTTONS ────────────────────────────── */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--blue);
+    color: var(--white);
+    padding: 16px 32px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 40px var(--blue-glow);
+    background: var(--blue-dark);
+  }
+
+  .btn-primary:hover::after { opacity: 1; }
+  .btn-primary:active { transform: translateY(0) scale(0.98); }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    color: var(--white);
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+    background: rgba(74,144,217,0.08);
+  }
+
+  /* ─── SECTION BASE ───────────────────────── */
+  section { padding: 100px 5%; }
+
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(74,144,217,0.12);
+    border: 1px solid rgba(74,144,217,0.3);
+    color: var(--blue);
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  /* ─── HERO ───────────────────────────────── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 120px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(ellipse at center, rgba(74,144,217,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(74,144,217,0.1);
+    border: 1px solid rgba(74,144,217,0.25);
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    color: var(--gray-200);
+    margin-bottom: 28px;
+  }
+
+  .hero-badge span { color: var(--blue); font-weight: 600; }
+
+  .hero-badge .dot {
+    width: 6px; height: 6px;
+    background: #22c55e;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #22c55e;
+    animation: pulse-dot 2s infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  h1.hero-headline {
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    margin-bottom: 20px;
+  }
+
+  h1.hero-headline em {
+    font-style: normal;
+    color: var(--blue);
+    position: relative;
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--gray-300);
+    line-height: 1.7;
+    max-width: 480px;
+    margin-bottom: 36px;
+    font-weight: 300;
+  }
+
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  .hero-social-proof {
+    margin-top: 48px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .avatars { display: flex; }
+
+  .avatar {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    border: 2px solid var(--black);
+    overflow: hidden;
+    margin-left: -8px;
+    background: var(--gray-600);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .avatar:first-child { margin-left: 0; }
+
+  .avatar-a { background: linear-gradient(135deg, #4A90D9, #2f6eb5); }
+  .avatar-b { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+  .avatar-c { background: linear-gradient(135deg, #10b981, #059669); }
+  .avatar-d { background: linear-gradient(135deg, #f59e0b, #d97706); }
+
+  .proof-text { font-size: 0.82rem; color: var(--gray-300); }
+  .proof-text strong { color: var(--white); }
+
+  /* ─── MOCKUP ─────────────────────────────── */
+  .hero-visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  .mockup-browser {
+    background: var(--gray-800);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 460px;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.04);
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  .browser-bar {
+    background: var(--gray-700);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .browser-dots { display: flex; gap: 6px; }
+
+  .browser-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+  }
+
+  .browser-dot.red { background: #ff5f57; }
+  .browser-dot.yellow { background: #febc2e; }
+  .browser-dot.green { background: #28c840; }
+
+  .browser-url {
+    flex: 1;
+    background: rgba(255,255,255,0.07);
+    border-radius: 6px;
+    padding: 5px 12px;
+    font-size: 0.72rem;
+    color: var(--gray-300);
+    font-family: 'DM Sans', monospace;
+  }
+
+  .mockup-screen {
+    padding: 24px;
+    min-height: 300px;
+  }
+
+  .mockup-nav-sim {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+  }
+
+  .mockup-logo-sim {
+    width: 80px; height: 12px;
+    background: var(--blue);
+    border-radius: 3px;
+    opacity: 0.9;
+  }
+
+  .mockup-links-sim { display: flex; gap: 10px; }
+
+  .mockup-link-sim {
+    width: 40px; height: 8px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 3px;
+  }
+
+  .mockup-hero-sim {
+    text-align: center;
+    padding: 16px 0 24px;
+  }
+
+  .mockup-h-sim {
+    height: 18px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.5) 100%);
+    border-radius: 4px;
+    margin: 0 auto 10px;
+    width: 80%;
+  }
+
+  .mockup-h-sim.sm { width: 55%; height: 12px; background: rgba(255,255,255,0.3); }
+
+  .mockup-btn-sim {
+    display: inline-block;
+    background: var(--blue);
+    width: 130px; height: 32px;
+    border-radius: 7px;
+    margin-top: 14px;
+  }
+
+  .mockup-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .mockup-card-sim {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 8px;
+    padding: 12px;
+  }
+
+  .mockup-card-icon {
+    width: 22px; height: 22px;
+    background: rgba(74,144,217,0.3);
+    border-radius: 5px;
+    margin-bottom: 8px;
+  }
+
+  .mockup-card-line {
+    height: 6px; background: rgba(255,255,255,0.12);
+    border-radius: 3px; margin-bottom: 5px;
+  }
+
+  .mockup-card-line.sm { width: 60%; }
+
+  .mockup-badge {
+    position: absolute;
+    bottom: -16px;
+    right: -16px;
+    background: var(--gray-800);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    animation: float 6s ease-in-out infinite;
+    animation-delay: -3s;
+  }
+
+  .badge-icon {
+    width: 38px; height: 38px;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+  }
+
+  .badge-text { font-size: 0.75rem; color: var(--gray-300); line-height: 1.4; }
+  .badge-text strong { display: block; color: var(--white); font-size: 0.88rem; }
+
+  /* ─── PROBLEM ────────────────────────────── */
+  #problema {
+    background: var(--gray-900);
+    position: relative;
+  }
+
+  #problema::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent);
+  }
+
+  .section-header { text-align: center; margin-bottom: 60px; }
+
+  .section-header h2 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    margin-bottom: 14px;
+  }
+
+  .section-header p { color: var(--gray-300); font-size: 1rem; max-width: 500px; margin: 0 auto; }
+
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .pain-card {
+    background: var(--gray-800);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+    padding: 28px;
+    transition: border-color 0.3s, transform 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pain-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(239,68,68,0.5), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .pain-card:hover { border-color: rgba(239,68,68,0.2); transform: translateY(-3px); }
+  .pain-card:hover::before { opacity: 1; }
+
+  .pain-icon {
+    font-size: 1.8rem;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .pain-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+
+  .pain-card p { font-size: 0.88rem; color: var(--gray-300); line-height: 1.6; }
+
+  /* ─── AGITAÇÃO ───────────────────────────── */
+  #agitacao {
+    background: linear-gradient(180deg, var(--gray-900) 0%, var(--black) 100%);
+  }
+
+  .agit-block {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .agit-block h2 {
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    margin-bottom: 28px;
+  }
+
+  .agit-block h2 .highlight {
+    color: var(--blue);
+    background: linear-gradient(135deg, #4A90D9, #8bc4f5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .agit-stats {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    margin: 48px 0;
+    flex-wrap: wrap;
+  }
+
+  .agit-stat { text-align: center; }
+
+  .agit-stat .number {
+    font-family: 'Poppins', sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--blue);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  .agit-stat .label { font-size: 0.82rem; color: var(--gray-300); margin-top: 6px; max-width: 120px; }
+
+  .agit-text { font-size: 1.05rem; color: var(--gray-300); line-height: 1.8; }
+
+  /* ─── SOLUÇÃO ────────────────────────────── */
+  #solucao {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .solucao-glow {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px; height: 400px;
+    background: radial-gradient(ellipse, rgba(74,144,217,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .solucao-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .solucao-content h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    margin-bottom: 20px;
+    line-height: 1.1;
+  }
+
+  .solucao-content p {
+    color: var(--gray-300);
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .solucao-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 28px 0; }
+
+  .chip {
+    background: rgba(74,144,217,0.1);
+    border: 1px solid rgba(74,144,217,0.2);
+    color: var(--blue);
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+
+  .solucao-visual { position: relative; }
+
+  .code-block {
+    background: var(--gray-800);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px;
+    overflow: hidden;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+  }
+
+  .code-header {
+    background: var(--gray-700);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .code-dots { display: flex; gap: 5px; }
+  .code-dot { width: 9px; height: 9px; border-radius: 50%; }
+  .code-dot.r { background: #ff5f57; }
+  .code-dot.y { background: #febc2e; }
+  .code-dot.g { background: #28c840; }
+  .code-title { font-size: 0.75rem; color: var(--gray-400); font-family: 'DM Sans', sans-serif; }
+
+  .code-body { padding: 20px; line-height: 2; }
+  .c-comment { color: #555; }
+  .c-key { color: #4A90D9; }
+  .c-val { color: #8bc4f5; }
+  .c-str { color: #86efac; }
+  .c-num { color: #f9a8d4; }
+
+  .result-card {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    background: var(--gray-800);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+
+  .result-label { font-size: 0.72rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+  .result-value { font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 800; color: #22c55e; }
+  .result-sub { font-size: 0.72rem; color: var(--gray-300); margin-top: 2px; }
+
+  /* ─── BENEFÍCIOS ─────────────────────────── */
+  #beneficios { background: var(--gray-900); }
+
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .benefit-card {
+    background: var(--gray-800);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+    padding: 28px;
+    transition: all 0.3s;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .benefit-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(74,144,217,0.05) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .benefit-card:hover { border-color: rgba(74,144,217,0.3); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+  .benefit-card:hover::after { opacity: 1; }
+
+  .benefit-icon {
+    width: 48px; height: 48px;
+    background: rgba(74,144,217,0.12);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 18px;
+  }
+
+  .benefit-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.01em; }
+  .benefit-card p { font-size: 0.86rem; color: var(--gray-300); line-height: 1.6; }
+
+  /* ─── COMO FUNCIONA ──────────────────────── */
+  #como-funciona { background: var(--black); }
+
+  .steps-container { position: relative; }
+
+  .steps-line {
+    position: absolute;
+    top: 28px;
+    left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(74,144,217,0.3), transparent);
+    pointer-events: none;
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    position: relative;
+  }
+
+  .step { text-align: center; }
+
+  .step-num {
+    width: 56px; height: 56px;
+    background: var(--gray-800);
+    border: 2px solid rgba(74,144,217,0.4);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--blue);
+    margin: 0 auto 24px;
+    position: relative;
+    z-index: 1;
+    background: var(--black);
+    transition: all 0.3s;
+  }
+
+  .step:hover .step-num {
+    background: var(--blue);
+    color: var(--white);
+    border-color: var(--blue);
+    box-shadow: 0 0 30px var(--blue-glow);
+  }
+
+  .step h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+  .step p { font-size: 0.88rem; color: var(--gray-300); line-height: 1.6; }
+
+  /* ─── PLANO ──────────────────────────────── */
+  #plano {
+    background: var(--gray-900);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #plano::before {
+    content: '';
+    position: absolute;
+    top: -100px; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 400px;
+    background: radial-gradient(ellipse, rgba(74,144,217,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .plano-card {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--gray-800);
+    border: 1px solid rgba(74,144,217,0.25);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.4), 0 0 0 1px rgba(74,144,217,0.1);
+    position: relative;
+  }
+
+  .plano-header {
+    background: linear-gradient(135deg, rgba(74,144,217,0.2) 0%, rgba(74,144,217,0.05) 100%);
+    padding: 32px 40px;
+    border-bottom: 1px solid rgba(74,144,217,0.2);
+    text-align: center;
+  }
+
+  .plano-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--blue);
+    color: var(--white);
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .plano-nome {
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    margin-bottom: 8px;
+  }
+
+  .plano-desc { color: var(--gray-300); font-size: 0.9rem; }
+
+  .plano-body { padding: 36px 40px; }
+
+  .plano-features { list-style: none; margin-bottom: 32px; }
+
+  .plano-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+
+  .plano-features li:last-child { border-bottom: none; }
+
+  .check {
+    width: 22px; height: 22px;
+    background: rgba(34,197,94,0.15);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #22c55e;
+    font-size: 0.8rem;
+    margin-top: 1px;
+  }
+
+  .plano-cta { width: 100%; font-size: 1.05rem; padding: 18px; }
+
+  .plano-note {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 0.78rem;
+    color: var(--gray-400);
+  }
+
+  /* ─── PROVA SOCIAL ───────────────────────── */
+  #prova { background: var(--black); }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.06);
+    margin-bottom: 60px;
+  }
+
+  .stat-box {
+    background: var(--gray-800);
+    padding: 40px 32px;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: var(--blue);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+
+  .stat-label { font-size: 0.85rem; color: var(--gray-300); line-height: 1.5; }
+
+  /* ─── OBJEÇÕES ───────────────────────────── */
+  #objecoes { background: var(--gray-900); }
+
+  .faq-list { max-width: 680px; margin: 0 auto; }
+
+  .faq-item {
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    overflow: hidden;
+  }
+
+  .faq-q {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 0;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+    user-select: none;
+    gap: 16px;
+  }
+
+  .faq-q:hover { color: var(--blue); }
+
+  .faq-arrow {
+    font-size: 1.1rem;
+    color: var(--blue);
+    transition: transform 0.3s;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .faq-item.open .faq-arrow { transform: rotate(45deg); }
+
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s;
+    color: var(--gray-300);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    padding-bottom: 0;
+  }
+
+  .faq-item.open .faq-a { max-height: 200px; padding-bottom: 20px; }
+
+  /* ─── CTA FINAL ──────────────────────────── */
+  #cta-final {
+    background: var(--black);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  #cta-final::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 50%, rgba(74,144,217,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 50%, rgba(74,144,217,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .cta-final-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+
+  .cta-final-inner h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    margin-bottom: 20px;
+  }
+
+  .cta-final-inner p { color: var(--gray-300); font-size: 1.05rem; margin-bottom: 40px; line-height: 1.7; }
+
+  .cta-btns { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+
+  .cta-urgency {
+    margin-top: 24px;
+    font-size: 0.8rem;
+    color: var(--gray-400);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .urgency-dot {
+    width: 6px; height: 6px;
+    background: #ef4444;
+    border-radius: 50%;
+    animation: pulse-dot 1.5s infinite;
+  }
+
+  /* ─── FOOTER ─────────────────────────────── */
+  footer {
+    background: var(--gray-900);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding: 48px 5%;
+  }
+
+  .footer-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 48px;
+  }
+
+  .footer-brand { }
+  .footer-logo { font-family: 'Poppins', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--white); margin-bottom: 12px; }
+  .footer-logo span { color: var(--blue); }
+  .footer-tagline { font-size: 0.85rem; color: var(--gray-400); line-height: 1.6; max-width: 240px; }
+
+  .footer-socials { display: flex; gap: 10px; margin-top: 20px; }
+
+  .social-icon {
+    width: 36px; height: 36px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    color: var(--gray-300);
+  }
+
+  .social-icon:hover { background: rgba(74,144,217,0.15); border-color: rgba(74,144,217,0.3); color: var(--blue); }
+
+  .footer-col h4 { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-400); margin-bottom: 16px; }
+
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 10px; }
+  .footer-links a { font-size: 0.88rem; color: var(--gray-300); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--blue); }
+
+  .footer-bottom {
+    max-width: 1100px;
+    margin: 40px auto 0;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.78rem;
+    color: var(--gray-400);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* ─── WHATSAPP FLOAT ─────────────────────── */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 1000;
+    background: #25d366;
+    color: var(--white);
+    width: 58px; height: 58px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    text-decoration: none;
+    box-shadow: 0 8px 30px rgba(37,211,102,0.4);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s;
+    animation: float-wa 3s ease-in-out infinite;
+  }
+
+  @keyframes float-wa {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  .whatsapp-float:hover {
+    transform: scale(1.12) translateY(-4px);
+    box-shadow: 0 12px 40px rgba(37,211,102,0.5);
+    animation: none;
+  }
+
+  
+  /* ─── ANIMATIONS ─────────────────────────── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  .fade-in-delay-1 { transition-delay: 0.1s; }
+  .fade-in-delay-2 { transition-delay: 0.2s; }
+  .fade-in-delay-3 { transition-delay: 0.3s; }
+  .fade-in-delay-4 { transition-delay: 0.4s; }
+
+  /* ─── RESPONSIVE ─────────────────────────── */
+  @media (max-width: 768px) {
+    section { padding: 70px 6%; }
+
+    nav { padding: 16px 6%; }
+
+    .hero-grid, .solucao-grid { grid-template-columns: 1fr; gap: 40px; }
+    .hero-visual { display: none; }
+
+    h1.hero-headline { font-size: 2.2rem; }
+
+    .steps-grid { grid-template-columns: 1fr; gap: 32px; }
+    .steps-line { display: none; }
+
+    .stats-grid { grid-template-columns: 1fr; gap: 2px; }
+
+    .agit-stats { gap: 28px; }
+    .agit-stat .number { font-size: 2.2rem; }
+
+    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+
+    .plano-header, .plano-body { padding: 24px; }
+
+    .hero-btns { flex-direction: column; }
+    .hero-btns a { width: 100%; justify-content: center; }
+  }
+
+  @media (max-width: 480px) {
+    .cta-btns { flex-direction: column; align-items: center; }
+    .cta-btns a { width: 100%; max-width: 320px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ──────────────────────────────────── -->
+<nav>
+  <a href="#" class="logo"><img class="img-logo" src="assets/logo-preta.png" alt=""></a>
+  <a href="https://wa.me/5511971131294?text=Olá!%20Quero%20criar%20um%20site%20profissional%20com%20a%20DevUp%20para%20atrair%20mais%20clientes.%20Como%20funciona?" target="_blank" class="nav-cta">
+    💬 Falar no WhatsApp
+  </a>
+</nav>
+
+<!-- ─── HERO ──────────────────────────────────── -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="container">
+    <div class="hero-grid">
+
+      <div class="hero-content fade-in">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          Disponível agora · <span>Atendimento rápido</span>
+        </div>
+
+        <h1 class="hero-headline">
+          Seu negócio está<br>
+          perdendo clientes<br>
+          por não ter um <em>site</em>.
+        </h1>
+
+        <p class="hero-sub">
+          Enquanto você não aparece no Google, seu concorrente já está fechando os clientes que seriam seus. A DevUp cria seu site profissional — rápido, simples e sem complicação.
+        </p>
+
+        <div class="hero-btns">
+          <a href="https://wa.me/5511971131294?text=Olá!%20Quero%20criar%20um%20site%20profissional%20com%20a%20DevUp%20para%20atrair%20mais%20clientes.%20Como%20funciona?" target="_blank" class="btn-primary">
+            💬 Falar no WhatsApp
+          </a>
+          <a href="#como-funciona" class="btn-outline">
+            Como funciona →
+          </a>
+        </div>
+
+        <div class="hero-social-proof">
+          <div class="avatars">
+            <div class="avatar avatar-a">M</div>
+            <div class="avatar avatar-b">C</div>
+            <div class="avatar avatar-c">R</div>
+            <div class="avatar avatar-d">J</div>
+          </div>
+          <div class="proof-text">
+            <strong>+50 empresas</strong> já saíram do anonimato digital
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual fade-in fade-in-delay-2">
+        <div class="mockup-browser">
+          <div class="browser-bar">
+            <div class="browser-dots">
+              <div class="browser-dot red"></div>
+              <div class="browser-dot yellow"></div>
+              <div class="browser-dot green"></div>
+            </div>
+            <div class="browser-url">seunegocio.com.br</div>
+          </div>
+          <div class="mockup-screen">
+            <div class="mockup-nav-sim">
+              <div class="mockup-logo-sim"></div>
+              <div class="mockup-links-sim">
+                <div class="mockup-link-sim"></div>
+                <div class="mockup-link-sim"></div>
+                <div class="mockup-link-sim"></div>
+              </div>
+            </div>
+            <div class="mockup-hero-sim">
+              <div class="mockup-h-sim"></div>
+              <div class="mockup-h-sim sm"></div>
+              <div class="mockup-btn-sim"></div>
+            </div>
+            <div class="mockup-cards">
+              <div class="mockup-card-sim">
+                <div class="mockup-card-icon"></div>
+                <div class="mockup-card-line"></div>
+                <div class="mockup-card-line sm"></div>
+              </div>
+              <div class="mockup-card-sim">
+                <div class="mockup-card-icon"></div>
+                <div class="mockup-card-line"></div>
+                <div class="mockup-card-line sm"></div>
+              </div>
+              <div class="mockup-card-sim">
+                <div class="mockup-card-icon"></div>
+                <div class="mockup-card-line"></div>
+                <div class="mockup-card-line sm"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mockup-badge">
+          <div class="badge-icon">📈</div>
+          <div class="badge-text">
+            <strong>+3x mais clientes</strong>
+            Empresas com site são mais encontradas
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROBLEMA ──────────────────────────────── -->
+<section id="problema">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="tag">⚠️ O Problema</div>
+      <h2>Por que você está<br>invisível para seus clientes?</h2>
+      <p>Sem site, seu negócio simplesmente não existe para a maioria das pessoas.</p>
+    </div>
+
+    <div class="pain-grid">
+      <div class="pain-card fade-in fade-in-delay-1">
+        <span class="pain-icon">🔍</span>
+        <h3>Não aparece no Google</h3>
+        <p>Seu cliente digita o serviço que você oferece e encontra o concorrente. Você nem aparece na busca.</p>
+      </div>
+      <div class="pain-card fade-in fade-in-delay-2">
+        <span class="pain-icon">💸</span>
+        <h3>Perdendo vendas todo dia</h3>
+        <p>Enquanto você depende de indicação, seu concorrente com site recebe leads automaticamente, 24 horas por dia.</p>
+      </div>
+      <div class="pain-card fade-in fade-in-delay-3">
+        <span class="pain-icon">😐</span>
+        <h3>Parece menos profissional</h3>
+        <p>"Você tem site?" É a primeira pergunta que clientes exigentes fazem antes de confiar em um negócio.</p>
+      </div>
+      <div class="pain-card fade-in fade-in-delay-1">
+        <span class="pain-icon">📱</span>
+        <h3>Dependência só do Instagram</h3>
+        <p>O algoritmo muda, o alcance cai — e seu negócio vai junto. Instagram não é presença digital, é aluguel.</p>
+      </div>
+      <div class="pain-card fade-in fade-in-delay-2">
+        <span class="pain-icon">🚫</span>
+        <h3>Sem credibilidade online</h3>
+        <p>Clientes pesquisam antes de comprar. Se não encontram informações sobre você, desconfiam e vão embora.</p>
+      </div>
+      <div class="pain-card fade-in fade-in-delay-3">
+        <span class="pain-icon">🔄</span>
+        <h3>Negócio parado sem você</h3>
+        <p>Sem site, você precisa estar disponível 24h para responder dúvidas. Um site trabalha enquanto você dorme.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── AGITAÇÃO ───────────────────────────────── -->
+<section id="agitacao">
+  <div class="container">
+    <div class="agit-block fade-in">
+      <div class="tag">📊 A Realidade</div>
+      <h2>
+        Enquanto você adia,<br>
+        <span class="highlight">seus clientes vão embora.</span>
+      </h2>
+
+      <div class="agit-stats">
+        <div class="agit-stat fade-in fade-in-delay-1">
+          <div class="number">80%</div>
+          <div class="label">dos clientes pesquisam online antes de comprar</div>
+        </div>
+        <div class="agit-stat fade-in fade-in-delay-2">
+          <div class="number">3x</div>
+          <div class="label">mais chances de ser encontrado com um site profissional</div>
+        </div>
+        <div class="agit-stat fade-in fade-in-delay-3">
+          <div class="number">75%</div>
+          <div class="label">dos usuários julgam a credibilidade pela presença online</div>
+        </div>
+      </div>
+
+      <p class="agit-text">
+        Cada dia sem site é mais um dia de receita que vai para o concorrente. 
+        Não é questão de "quando tiver tempo" — é urgência de negócio.
+        <br><br>
+        A boa notícia: <strong style="color: var(--white)">resolver isso é mais simples do que você pensa.</strong>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SOLUÇÃO ────────────────────────────────── -->
+<section id="solucao">
+  <div class="solucao-glow"></div>
+  <div class="container">
+    <div class="solucao-grid">
+
+      <div class="solucao-content fade-in">
+        <div class="tag">✅ A Solução</div>
+        <h2>Simples, rápido<br>e sem complicação.</h2>
+        <p>
+          A DevUp cuida de tudo. Você não precisa entender de tecnologia, não precisa aprender nada novo e não precisa perder tempo.
+        </p>
+        <p>
+          A gente cria seu site profissional do zero — com design moderno, otimizado para aparecer no Google e com botão direto para o seu WhatsApp.
+        </p>
+
+        <div class="solucao-chips">
+          <span class="chip">Design moderno</span>
+          <span class="chip">Mobile-first</span>
+          <span class="chip">Botão WhatsApp</span>
+          <span class="chip">Entrega rápida</span>
+          <span class="chip">Sem burocracia</span>
+        </div>
+
+        <a href="https://wa.me/5511971131294?text=Olá!%20Quero%20criar%20um%20site%20profissional%20com%20a%20DevUp%20para%20atrair%20mais%20clientes.%20Como%20funciona?" target="_blank" class="btn-primary">
+          💬 Quero meu site agora
+        </a>
+      </div>
+
+      <div class="solucao-visual fade-in fade-in-delay-2">
+        <div class="code-block">
+          <div class="code-header">
+            <div class="code-dots">
+              <div class="code-dot r"></div>
+              <div class="code-dot y"></div>
+              <div class="code-dot g"></div>
+            </div>
+            <div class="code-title">seu-site.config.js</div>
+          </div>
+          <div class="code-body">
+            <div><span class="c-comment">// Seu site pronto para converter</span></div>
+            <div>&nbsp;</div>
+            <div><span class="c-key">const</span> <span class="c-val">meuSite</span> = {</div>
+            <div>&nbsp;&nbsp;<span class="c-str">design</span>: <span class="c-val">"moderno"</span>,</div>
+            <div>&nbsp;&nbsp;<span class="c-str">responsivo</span>: <span class="c-num">true</span>,</div>
+            <div>&nbsp;&nbsp;<span class="c-str">whatsapp</span>: <span class="c-val">"integrado"</span>,</div>
+            <div>&nbsp;&nbsp;<span class="c-str">entrega</span>: <span class="c-val">"rápida"</span>,</div>
+            <div>&nbsp;&nbsp;<span class="c-str">burocracia</span>: <span class="c-num">false</span>,</div>
+            <div>&nbsp;&nbsp;<span class="c-str">complicação</span>: <span class="c-num">false</span>,</div>
+            <div>&nbsp;&nbsp;<span class="c-str">resultado</span>: <span class="c-val">"garantido"</span></div>
+            <div>};</div>
+          </div>
+        </div>
+
+        <div class="result-card">
+          <div class="result-label">Status</div>
+          <div class="result-value">✓ Online</div>
+          <div class="result-sub">Recebendo clientes 24h/dia</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── BENEFÍCIOS ─────────────────────────────── -->
+<section id="beneficios">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="tag">🚀 Benefícios</div>
+      <h2>O que muda no seu<br>negócio a partir de agora</h2>
+      <p>Um site bem feito não é custo — é o vendedor que trabalha por você enquanto você dorme.</p>
+    </div>
+
+    <div class="benefits-grid">
+      <div class="benefit-card fade-in fade-in-delay-1">
+        <div class="benefit-icon">📞</div>
+        <h3>Mais clientes entrando em contato</h3>
+        <p>Pessoas que te procuram no Google chegam diretamente no seu WhatsApp — prontas para comprar.</p>
+      </div>
+      <div class="benefit-card fade-in fade-in-delay-2">
+        <div class="benefit-icon">🌙</div>
+        <h3>Negócio ativo 24 horas</h3>
+        <p>Seu site trabalha enquanto você descansa. Clientes descobrem, se interessam e entram em contato quando quiserem.</p>
+      </div>
+      <div class="benefit-card fade-in fade-in-delay-3">
+        <div class="benefit-icon">🏆</div>
+        <h3>Autoridade e confiança</h3>
+        <p>Um site profissional transforma sua imagem. De "desconhecido" para "referência" na sua área.</p>
+      </div>
+      <div class="benefit-card fade-in fade-in-delay-1">
+        <div class="benefit-icon">📍</div>
+        <h3>Aparece no Google Maps</h3>
+        <p>Com site ativo, seu negócio tem muito mais chances de aparecer nas buscas locais — exatamente onde o cliente está.</p>
+      </div>
+      <div class="benefit-card fade-in fade-in-delay-2">
+        <div class="benefit-icon">💬</div>
+        <h3>Direto para o WhatsApp</h3>
+        <p>Botão integrado que manda o cliente direto para você — sem fricção, sem perda de contato.</p>
+      </div>
+      <div class="benefit-card fade-in fade-in-delay-3">
+        <div class="benefit-icon">📱</div>
+        <h3>Perfeito no celular</h3>
+        <p>Design responsivo que funciona igualmente bem no celular e no desktop — onde quer que seu cliente esteja.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── COMO FUNCIONA ──────────────────────────── -->
+<section id="como-funciona">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="tag">⚡ Como funciona</div>
+      <h2>3 passos para seu<br>negócio estar online</h2>
+      <p>Processo simples, sem enrolação. Do contato à entrega em tempo recorde.</p>
+    </div>
+
+    <div class="steps-container fade-in">
+      <div class="steps-line"></div>
+      <div class="steps-grid">
+        <div class="step fade-in fade-in-delay-1">
+          <div class="step-num">1</div>
+          <h3>Você entra em contato</h3>
+          <p>Manda uma mensagem no WhatsApp. A gente entende seu negócio, seu público e o que você precisa. Sem formulário complicado.</p>
+        </div>
+        <div class="step fade-in fade-in-delay-2">
+          <div class="step-num">2</div>
+          <h3>A DevUp cria seu site</h3>
+          <p>Nosso time cuida de tudo: design, textos, estrutura e configuração. Você aprova antes de publicar.</p>
+        </div>
+        <div class="step fade-in fade-in-delay-3">
+          <div class="step-num">3</div>
+          <h3>Você começa a receber mensagens</h3>
+          <p>Seu site vai ao ar e os primeiros clientes já chegam pelo Google e pelo botão do WhatsApp integrado.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PLANO ──────────────────────────────────── -->
+<section id="plano">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="tag">💎 O Plano</div>
+      <h2>Tudo que você precisa,<br>sem nada que você não precisa</h2>
+      <p>Um único plano. Completo. Sem surpresas.</p>
+    </div>
+
+    <div class="plano-card fade-in">
+      <div class="plano-header">
+        <div class="plano-badge">⭐ Plano Único</div>
+        <div class="plano-nome">Site Institucional Completo</div>
+        <div class="plano-desc">Tudo que seu negócio precisa para ter presença online de verdade</div>
+      </div>
+      <div class="plano-body">
+        <ul class="plano-features">
+          <li>
+            <span class="check">✓</span>
+            <span><strong>Site institucional completo</strong> — apresentação profissional do seu negócio, serviços e contato</span>
+          </li>
+          <li>
+            <span class="check">✓</span>
+            <span><strong>Design moderno e personalizado</strong> — visual alinhado com a identidade do seu negócio, não um template genérico</span>
+          </li>
+          <li>
+            <span class="check">✓</span>
+            <span><strong>Responsivo: celular e desktop</strong> — seu site funciona perfeitamente em qualquer dispositivo</span>
+          </li>
+          <li>
+            <span class="check">✓</span>
+            <span><strong>Botão direto para o WhatsApp</strong> — o cliente clica e já cai na sua conversa, pronto para comprar</span>
+          </li>
+          <li>
+            <span class="check">✓</span>
+            <span><strong>Otimizado para Google</strong> — estrutura que ajuda seu site a aparecer nas buscas locais</span>
+          </li>
+          <li>
+            <span class="check">✓</span>
+            <span><strong>Entrega rápida</strong> — sem esperar meses. Você fica online em tempo recorde</span>
+          </li>
+          <li>
+            <span class="check">✓</span>
+            <span><strong>Sem burocracia</strong> — processo direto, sem contrato complicado, sem surpresas</span>
+          </li>
+        </ul>
+
+        <a href="https://wa.me/5511971131294?text=Olá!%20Quero%20criar%20um%20site%20profissional%20com%20a%20DevUp%20para%20atrair%20mais%20clientes.%20Como%20funciona?" target="_blank" class="btn-primary plano-cta">
+          💬 Solicitar orçamento
+        </a>
+        <p class="plano-note">Sem compromisso · Orçamento grátis · Resposta rápida</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROVA SOCIAL ───────────────────────────── -->
+<section id="prova">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="tag">📈 Por que funciona</div>
+      <h2>Os dados não mentem</h2>
+      <p>Empresas com site profissional se destacam. É só uma questão de quem age primeiro.</p>
+    </div>
+
+    <div class="stats-grid fade-in">
+      <div class="stat-box">
+        <div class="stat-number">3x</div>
+        <div class="stat-label">mais chances de ser encontrado por clientes com um site ativo</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">80%</div>
+        <div class="stat-label">dos consumidores pesquisam online antes de fechar qualquer negócio</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">75%</div>
+        <div class="stat-label">das pessoas julgam a credibilidade de uma empresa pela presença digital</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── OBJEÇÕES ───────────────────────────────── -->
+<section id="objecoes">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="tag">🙋 Dúvidas Frequentes</div>
+      <h2>Pode ter dúvidas.<br>A gente resolve.</h2>
+    </div>
+
+    <div class="faq-list fade-in">
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Preciso entender de tecnologia para ter um site?
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-a">
+          Não, zero. A DevUp cuida de tudo — criação, configuração e publicação. Você só precisa nos contar sobre o seu negócio. O resto é com a gente.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Quanto tempo leva para ficar pronto?
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-a">
+          Nosso processo é rápido. Entre o primeiro contato, a aprovação do layout e a publicação, o prazo é bem menor do que você imagina. Entre em contato para sabermos mais sobre sua necessidade.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Vou precisar atualizar o site depois?
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-a">
+          Sites institucionais são estáveis — não precisam de atualizações constantes. E se precisar de alguma mudança no futuro, a gente está aqui.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Meu negócio é pequeno. Vale a pena ter site?
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-a">
+          Especialmente para negócios pequenos e locais. Um site profissional coloca você em igualdade com concorrentes maiores e aumenta muito a sua credibilidade com clientes novos.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Já tenho Instagram. Preciso mesmo de um site?
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-a">
+          Instagram e site se complementam, mas são muito diferentes. O Instagram depende do algoritmo e do seu esforço diário. O site trabalha para você 24h, aparece no Google e passa muito mais credibilidade para clientes que pesquisam antes de comprar.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Como funciona o processo de orçamento?
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-a">
+          É simples: você manda uma mensagem no WhatsApp, a gente entende sua necessidade e envia o orçamento sem compromisso. Sem formulário, sem burocracia.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA FINAL ──────────────────────────────── -->
+<section id="cta-final">
+  <div class="container">
+    <div class="cta-final-inner fade-in">
+      <div class="tag" style="margin: 0 auto 24px;">🔥 Não espere mais</div>
+      <h2>
+        Pare de perder clientes<br>
+        <span style="color: var(--blue)">hoje mesmo.</span>
+      </h2>
+      <p>
+        Cada dia sem site é mais um dia em que clientes escolhem o concorrente. 
+        O próximo passo é simples: manda uma mensagem e a DevUp cuida do resto.
+      </p>
+
+      <div class="cta-btns">
+        <a href="https://wa.me/5511971131294?text=Olá!%20Quero%20criar%20um%20site%20profissional%20com%20a%20DevUp%20para%20atrair%20mais%20clientes.%20Como%20funciona?" target="_blank" class="btn-primary" style="font-size: 1.1rem; padding: 20px 40px;">
+          💬 Falar no WhatsApp agora
+        </a>
+      </div>
+
+      <p class="cta-urgency">
+        <span class="urgency-dot"></span>
+        Atendimento disponível agora · Sem compromisso · 100% sem burocracia
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─────────────────────────────────── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo"><img class="img-logo" src="assets/logo-preta.png" alt=""></div>
+      <p class="footer-tagline">Sites profissionais para pequenas empresas. Rápido, simples e sem complicação.</p>
+      <div class="footer-socials">
+        <a href="#" class="social-icon" title="Instagram">📸</a>
+        <a href="#" class="social-icon" title="Facebook">👤</a>
+        <a href="https://wa.me/5511971131294?text=Olá!%20Quero%20criar%20um%20site%20profissional%20com%20a%20DevUp%20para%20atrair%20mais%20clientes.%20Como%20funciona?" target="_blank" class="social-icon" title="WhatsApp">💬</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Navegação</h4>
+      <ul class="footer-links">
+        <li><a href="#problema">O Problema</a></li>
+        <li><a href="#solucao">A Solução</a></li>
+        <li><a href="#beneficios">Benefícios</a></li>
+        <li><a href="#como-funciona">Como Funciona</a></li>
+        <li><a href="#plano">Plano</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contato</h4>
+      <ul class="footer-links">
+        <li><a href="https://wa.me/5511971131294?text=Olá!%20Quero%20criar%20um%20site%20profissional%20com%20a%20DevUp%20para%20atrair%20mais%20clientes.%20Como%20funciona?" target="_blank">WhatsApp</a></li>
+        <li><a href="mailto:contato@devup.com.br">contato@devup.com.br</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2025 DevUp. Todos os direitos reservados.</span>
+    <span>Sites profissionais para negócios que querem crescer.</span>
+  </div>
+</footer>
+
+<!-- ─── WHATSAPP FLOAT ─────────────────────────── -->
+<a href="https://wa.me/5511971131294?text=Olá!%20Quero%20criar%20um%20site%20profissional%20com%20a%20DevUp%20para%20atrair%20mais%20clientes.%20Como%20funciona?" title="Falar no WhatsApp">
+  <div class="whatsapp-pulse"></div>
+  💬
+</a>
+
+<script>
+  // ─── FAQ TOGGLE
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // ─── FADE IN ON SCROLL
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // ─── NAV SCROLL
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) {
+      nav.style.background = 'rgba(0,0,0,0.95)';
+    } else {
+      nav.style.background = 'rgba(0,0,0,0.7)';
+    }
+  });
+
+  // ─── COUNTER ANIMATION
+  function animateCount(el, target, suffix = '') {
+    let start = 0;
+    const duration = 1800;
+    const step = (timestamp) => {
+      if (!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.floor(eased * target) + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const nums = entry.target.querySelectorAll('.stat-number, .agit-stat .number');
+        nums.forEach(n => {
+          const text = n.textContent;
+          if (text.includes('%')) animateCount(n, parseInt(text), '%');
+          else if (text.includes('x')) { n.textContent = text; }
+        });
+        statsObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.stats-grid, .agit-stats').forEach(el => statsObserver.observe(el));
+
+  // ─── SMOOTH SCROLL
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
