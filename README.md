@@ -45,7 +45,7 @@ Oferecemos um modelo direto ao ponto:
 ```
 /
    /assets
-   devup-landing.html
+   index.html
 ```
 
 ---
@@ -60,12 +60,12 @@ git clone https://github.com/P3DR0H3NRIQU3/site-devup-landing-page#
 cd site-devup-landing-page
 
 # Abra o arquivo no navegador
-start devup-landing.html
+start index.html
 ```
 
 Ou simplesmente:
 
-- Clique duas vezes no `devup-landing.html`
+- Clique duas vezes no `index.html`
 
 ---
 
